@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <nav>
+            <ul class="nav nav-tabs">
+                <li>
+                    <a href="index.html"> Home </a>
+                </li>
+                <li>
+                    <a href="feedback.html"> Feedback </a>
+                </li>
+            </ul>
+        </nav>
+    <title>Feedback</title>
+    <header> <h1>Fietsreparaties Tom&Co <small> (Jonas Verhenne) </small> </h1> </header>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="CSS.css"> 
+    </head>
+    
+    <body>
+        <form action='https://formspree.io/jonas.verhenne@ugent.be' method='POST'>
+            <fieldset> <legend>Persoonlijke gegevens</legend>
+                <div class='form-group'>
+                    <label for="naam">Familienaam</label>
+                    <input id="naam" name="naam" class="form-control" type="text" placeholder='Smith' required/>
+                </div>
+                
+                <div class='form-group'>
+                    <label for="email">e-mail</label>
+                    <input id="email" name="email" class="form-control" type="email" required/>
+                </div>
+                
+                <div class='form-group'>
+                    <label for="geboortedatum">Geboortedatum</label>
+                    <input id="geboortedatum" name="geboortedatum" class="form-control" type="date" required/>
+                </div>
+               
+                <div class='form-group'>
+                    <label for="leeftijd">Leeftijd</label>
+                    <input id="leeftijd" name="leeftijd" class="form-control" type="number" max="100"/>
+                </div>
+                
+                    <label for="man" class="radio-inline">Man</label>
+                    <input id="man" name="geslacht" type="radio" value="M"/>
+                    <label for="vrouw" class="radio-inline">Vrouw</label>
+                    <input id="vrouw" name="geslacht" type="radio" value="V"/>
+                
+                <div class='form-group'>
+                    <label for="telefoon">Telefoon nr.</label>
+                    <input id="telefoon" name="telefoon" class="form-control" type="tel"/>
+                </div>
+                  
+                <label for="nationaliteit">Nationaliteit: </label>
+                <select name='nationaliteit' id='nationaliteit'>
+                    <option value='belg'>Belg</option>
+                    <option value='nederlands'>Nederlands</option>
+                    <option value='frans'>Frans</option>
+                    <option value='duits'>Duits</option>
+                    <option value='brits'>Brits</option>
+                    <option value='spaans'>Spaans</option>
+                    <option value='italiaans'>Italiaans</option>
+                    <option value='ander'>Ander</option>
+                </select>
+                <br>
+                
+                <legend>Persoonlijke voorkeuren</legend>
+                
+                <div class='form-group'>
+                    <label>Hobby's: </label>
+                    <label for='sport' class="checkbox-inline">Sport</label>
+                    <input id='sport' name='hobby' type='checkbox' value='Sporten'/>
+                    <label for='muziek' class="checkbox-inline">Muziek</label>
+                    <input id='muziek' name='hobby' type='checkbox' value='Muziek'/>
+                    <label for='relaxen' class="checkbox-inline">Relaxen</label>
+                    <input id='relaxen' name='hobby' type='checkbox' value='Relaxen'/>
+                    <label for='gamen' class="checkbox-inline">Gamen</label>
+                    <input id='gamen' name='hobby' type='checkbox' value='Gamen'/>
+                    <label for='werken' class="checkbox-inline">Werken</label>
+                    <input id='werken' name='hobby' type='checkbox' value='Werken'/>
+                </div>
+                
+                <div class='form-group'>
+                    <label for='mening'>Schrijf hier je mening over mijn site:</label>
+                    <textarea id='mening' name='mening' cols='60' rows='5'></textarea>
+                </div>
+                
+                <input type="submit" value="Doorsturen" class="btn btn-primary"/>
+                
+                <input type='reset' value='Reset antwoorden' class="btn btn-warning"/>
+            </fieldset>
+        </form>
+    </body>
+</html>
