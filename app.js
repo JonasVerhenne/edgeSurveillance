@@ -27,6 +27,7 @@ const getImage = async function(name)
 const showImage = function (image)
 {
     $('#myImg').attr('src', data);
+    
 }
 
 
@@ -49,7 +50,10 @@ const init = function()
     //get status from hub
     systemStatus = true;
     listenToUI();
-    getImage('test.png')
+    //getImage('test.png')
+    const image = document.createElement('img');
+    image.src  = '/test.png';
+    document.getElementById('myImg2').appendChild(image)
 }
 
 document.addEventListener('DOMContentLoaded', init);
