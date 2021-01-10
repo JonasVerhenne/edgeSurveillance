@@ -50,7 +50,7 @@ const init = function()
     //get status from hub
     systemStatus = true;
     listenToUI();
-    //getImage('test.png')
+    getImage('test.png')
     const image = document.createElement('img');
     image.src  = '/test.png';
     document.getElementById('myImg2').appendChild(image)
