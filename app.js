@@ -15,7 +15,7 @@ const getImage = async function(name)
         console.log(`http://localhost:7071/api/image/${name}`);
         const data = await fetchData(`http://localhost:7071/api/image/${name}`);
         //console.log(data)
-        //$('#myImg').attr('src', data);
+        //
         showImage(data);
     }
     catch(error)
@@ -26,7 +26,7 @@ const getImage = async function(name)
 
 const showImage = function (image)
 {
-
+    $('#myImg').attr('src', data);
 }
 
 
