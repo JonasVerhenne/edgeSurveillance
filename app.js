@@ -12,8 +12,8 @@ const getImage = async function(name)
 {
     try
     {
-        console.log(`http://localhost:7071/api/image/${name}`);
-        const data = await fetchData(`http://localhost:7071/api/image/${name}`);
+        console.log(`https://edgesurveillancefunction.azurewebsites.net/api/image/${name}`);
+        const data = await fetchData(`https://edgesurveillancefunction.azurewebsites.net/api/image/${name}`);
         //console.log(data)
         //
         showImage(data);
