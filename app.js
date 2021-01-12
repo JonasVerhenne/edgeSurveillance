@@ -70,6 +70,13 @@ const closePopUp = function ()
 {
     modal.style.display = "none";
 }
+window.onclick = function(event) //close popup when clicking next to popup
+{
+    if (event.target == modal)
+    {
+      modal.style.display = "none";
+    }
+}
 
 const listenToUI = function ()
 {
