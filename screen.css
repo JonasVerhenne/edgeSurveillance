@@ -17,6 +17,7 @@ h1, h2{
     margin: 56px 0 40px 0;
 }
 .status > div {
+    padding-top: 4px;
     text-align: end;
     font-weight: bold;
 }
