@@ -1,3 +1,38 @@
+html {
+    font-size: 20px;
+}
+
+body {
+    padding: 40px;
+    background-color: #f6fcff;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+.status {
+    display: grid;
+    grid-template-columns: 1fr 20% 1fr;
+    margin: 56px 0 40px 0;
+}
+.status > div {
+    text-align: end;
+    font-weight: bold;
+}
+.status > label {
+    grid-column: 3;
+}
+
+.activities {
+    font-size: 24px;
+}
+
+.select {
+    background-color:  #f6fcff;
+}
+
+/*--------------------------------------------slider--------------------------------------------*/
 .switch {
     position: relative;
     display: inline-block;
@@ -18,7 +53,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: rgb(255, 40, 40);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -36,7 +71,7 @@
 }
   
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #00b409;
 }
   
 input:checked + .slider:before {
@@ -52,4 +87,45 @@ input:checked + .slider:before {
   
 .slider.round:before {
     border-radius: 50%;
+}
+/*--------------------------------------------slider--------------------------------------------*/
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 50px 1fr 1fr 1fr 50% 50px;
+    /*grid-template-rows: repeat(2, minmax(100px, auto));*/
+}
+.grid-head {
+    padding-top: 16px;
+    text-align: center;
+    font-weight: bold;
+    border-top: solid 1px black;
+}
+.grid-body {
+    margin-top: 16px;
+    border-top: solid 1px black;
+}
+.grid-body > div {
+    margin: auto;
+}
+.grid-time {
+    grid-column: 2;
+}
+.grid-location {
+    grid-column: 3;
+}
+.grid-detection {
+    grid-column: 4;
+}
+.grid-images {
+    grid-column: 5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+}
+.image{
+    width: 100%;
+    margin: 16px 0px;
+    margin-bottom: 0px;
 }

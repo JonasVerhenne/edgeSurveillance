@@ -25,9 +25,34 @@ const showImage = function (image)
 
 const toggleSystem = function ()
 {
-    console.log("switching");
+    console.log("switching status");
     systemStatus = !systemStatus;
     console.log(systemStatus);
+
+    /*
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "URL");
+    */
+    /*xhr.setRequestHeader('Content-Type', 'application/json');*/
+    /*
+    xhr.send();
+    xhr.onreadystatechange = function ()
+    {
+        if(xhr.readyState == XMLHttpRequest.DONE)
+        {
+            response = xhr.responseText; 
+            //console.log(response);
+            if (response == parseInt(response, 10))
+            {
+                console.log("succesfully send message")
+            }
+            else
+            {
+                console.log("error sending message")
+            }
+        }
+    }
+    */
 }
 
 const listenToDetection = function()

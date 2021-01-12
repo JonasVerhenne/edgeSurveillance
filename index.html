@@ -20,28 +20,65 @@ and open the template in the editor.
     <body>
         <h2>Welcome to edge surveillance</h2>
 
-        <div>
-            disable / enable security system
+        <div class="status">
+            <div>
+                disable / enable security system:
+            </div>
             <label class="switch js-switch">
                 <input type="checkbox" checked>
                 <span class="slider round"></span>
             </label>
         </div>
 
+
+
+
+
+
         <div>
-            latest activities
-            <select name="detection" class='dropdown js-detection'>
-                <option value="all">all</option>
-                <option value="person">person</option>
-                <option value="non-person">non-person</option>
-            </select>
+            <div class='activities' >
+                latest activities:
+            </div>
+            <div class='grid-container grid-head'>
+                <div class="grid-time">
+                    time
+                </div>
+                <div class="grid-location">
+                    location
+                </div>
+                <div class="grid-detection">
+                    detection:
+                    <select class= 'js-detection select'>
+                        <option value="all">all</option>
+                        <option value="person">person</option>
+                        <option value="non-person">non-person</option>
+                    </select>
+                </div>
+                <div class="">
+                    images
+                </div>
+            </div>
+            <div id = 'js-history'>
+                <div class='grid-container grid-body'>
+                        <div class="grid-time">
+                            03:54:21 12/01/2021
+                        </div>
+                        <div class="grid-location">
+                            home
+                        </div>
+                        <div class="grid-detection">
+                            person detected
+                        </div>
+                        <div class="grid-images">
+                            <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/test.png" class="image">
+                            <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/test2.png" class="image">
+                        </div>
+                </div>
+            </div>
         </div>
+        <hr>
 
-        <div class='js-history'>
-
-        </div>
-
-
+        
 
         <div id="myImg">
         </div>
