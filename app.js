@@ -18,8 +18,8 @@ const getImage = async function(name)
 
 const showImage = function (image)
 {
-    let htmlQuestion = `<img src=${image.url}>`;
-    document.getElementById("myImg").innerHTML = htmlQuestion;
+    html = `<img src=${image.url}>`;
+    document.getElementById("myImg").innerHTML = html;
 }
 
 
@@ -36,21 +36,11 @@ const toggleSystem = function ()
     /*xhr.setRequestHeader('Content-Type', 'application/json');*/
     /*
     xhr.send();
+    */
+    /*
     xhr.onreadystatechange = function ()
     {
-        if(xhr.readyState == XMLHttpRequest.DONE)
-        {
-            response = xhr.responseText; 
-            //console.log(response);
-            if (response == parseInt(response, 10))
-            {
-                console.log("succesfully send message")
-            }
-            else
-            {
-                console.log("error sending message")
-            }
-        }
+        
     }
     */
 }
@@ -67,6 +57,20 @@ const listenToDetection = function()
     detectionValue = newDetectionValue
 }
 
+const imagePopUp = function(data)
+{
+    data = data.outerHTML; //converting object into string
+    src = data.split("\"")[1];
+
+    html = `<img src=${src} class="image">`;
+    document.getElementById("js-popUpImage").innerHTML = html;
+    modal.style.display = 'block';
+}
+const closePopUp = function ()
+{
+    modal.style.display = "none";
+}
+
 const listenToUI = function ()
 {
     toggle = document.querySelector(".js-switch");
@@ -74,6 +78,15 @@ const listenToUI = function ()
 
     toggle.addEventListener('change', toggleSystem);
     detection.addEventListener('click', listenToDetection);
+
+    modal = document.getElementById('js-modal');
+    close = document.querySelector('.close');
+    close.addEventListener('click', closePopUp);
+
+    image1 = document.querySelector(".js-image1");
+    image2 = document.querySelector(".js-image2");
+    image1.addEventListener('click', function() {imagePopUp(image1)});
+    image2.addEventListener('click', function() {imagePopUp(image2)});
 }
 
 const init = function()

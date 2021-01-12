@@ -60,19 +60,26 @@ and open the template in the editor.
             </div>
             <div id = 'js-history'>
                 <div class='grid-container grid-body'>
-                        <div class="grid-time">
-                            03:54:21 12/01/2021
+                    <div class="grid-time">
+                        03:54:21 12/01/2021
+                    </div>
+                    <div class="grid-location">
+                        home
+                    </div>
+                    <div class="grid-detection">
+                        person detected
+                    </div>
+                    <div class="grid-images">
+                        <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/test.png" class="image js-image1">
+                        <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/test2.png" class="image js-image2">
+                    </div>
+
+                    <div class="modal" id="js-modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div id='js-popUpImage'></div>
                         </div>
-                        <div class="grid-location">
-                            home
-                        </div>
-                        <div class="grid-detection">
-                            person detected
-                        </div>
-                        <div class="grid-images">
-                            <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/test.png" class="image">
-                            <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/test2.png" class="image">
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
