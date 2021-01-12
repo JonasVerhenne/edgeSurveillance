@@ -19,19 +19,31 @@ and open the template in the editor.
     
     <body>
         <h2>Welcome to edge surveillance</h2>
+
         <div>
-            enable / disable security system
+            disable / enable security system
             <label class="switch js-switch">
                 <input type="checkbox" checked>
                 <span class="slider round"></span>
             </label>
         </div>
+
         <div>
             latest activities
+            <select name="detection" class='dropdown js-detection'>
+                <option value="all">all</option>
+                <option value="person">person</option>
+                <option value="non-person">non-person</option>
+            </select>
         </div>
-        <div>
-            <img id="myImg" style="width:500px;height:600px;">
-            <div id="myImg2"></div>
+
+        <div class='js-history'>
+
+        </div>
+
+
+
+        <div id="myImg">
         </div>
     </body>
 </html>
