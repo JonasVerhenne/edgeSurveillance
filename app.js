@@ -1,25 +1,100 @@
 let customHeaders = new Headers();
-//customHeaders.append('Accept', 'application/json');
-customHeaders.append('Content-Type', 'image/png');
+customHeaders.append('Accept', 'application/json');
+// customHeaders.append('Content-Type', 'image/png');
 
 const fetchData = function(url)
 {
     return fetch(url, {headers: customHeaders})
-        .then(r => r)
+        .then(r => r.json())
         .then(data => data);
 }
 
-const getImage = async function(name)
+// const fetchImage = function(url)
+// {
+//     return fetch(url, {headers: customHeaders})
+//         .then(r => r)
+//         .then(data => data);
+// }
+
+const getHistory = async function ()
 {
-    img = new Image();
-    img = await fetchData(`https://edgesurveillancefunction.azurewebsites.net/api/image/${name}`);
-    showImage(img);
+    historyList = [];
+    var data = await fetchData(`https://edgesurveillancefunction.azurewebsites.net/api/activity`);
+    for (let i = 0; i < data.length; i++)
+    {
+        historyList.push(data[i]);
+    }
+
+    await showHistory(historyList)
 }
 
-const showImage = function (image)
+const getHistoryFilter = async function (filter)
 {
-    html = `<img src=${image.url}>`;
-    document.getElementById("myImg").innerHTML = html;
+    historyList = [];
+    var data = await fetchData(`https://edgesurveillancefunction.azurewebsites.net/api/activity/${filter}`);
+    for (let i = 0; i < data.length; i++)
+    {
+        historyList.push(data[i]);
+    }
+
+    await showHistory(historyList)
+}
+
+const showHistory = async function (history)
+{
+    console.log(history)
+    document.getElementById('js-history').innerHTML = "";
+    for (let i = 0; i < history.length; i++)
+    {
+        if (history[i].person_detected)
+        {
+            person_detected = "person detected";
+        }
+        else
+        {
+            person_detected = "no person detected";
+        }
+        htmlContent = 
+        `<div class='grid-container grid-body'>
+            <div class="grid-time">
+                ${history[i].time}
+            </div>
+            <div class="grid-location">
+                ${history[i].location}
+            </div>
+            <div class="grid-detection">
+                ${person_detected}
+            </div>
+            <div class="grid-images">
+                <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/${history[i].image1}" class="image js-image1">
+                <img src="https://edgesurveillancefunction.azurewebsites.net/api/image/${history[i].image2}" class="image js-image2">
+            </div>
+        </div>`;
+
+        document.getElementById('js-history').innerHTML += htmlContent;
+    }
+
+    htmlModal = 
+    `<div class="modal" id="js-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class='modal-image' id='js-popUpImage'></div>
+        </div>
+    </div>`;
+    document.getElementById('js-history').innerHTML += htmlModal; //modal has to be at the end
+
+
+    modal = document.getElementById('js-modal');
+    closeButton = document.querySelector('.close');
+    closeButton.addEventListener('click', closePopUp);
+
+    image1 = document.querySelectorAll(".js-image1");
+    image2 = document.querySelectorAll(".js-image2");
+    for (let i = 0; i < history.length; i++)
+    {
+        image1[i].addEventListener('click', function() {imagePopUp(image1[i])});
+        image2[i].addEventListener('click', function() {imagePopUp(image2[i])});
+    }
 }
 
 
@@ -28,39 +103,29 @@ const toggleSystem = function ()
     console.log("switching status");
     systemStatus = !systemStatus;
     console.log(systemStatus);
-
-    /*
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "URL");
-    */
-    /*xhr.setRequestHeader('Content-Type', 'application/json');*/
-    /*
-    xhr.send();
-    */
-    /*
-    xhr.onreadystatechange = function ()
-    {
-        
-    }
-    */
 }
 
 const listenToDetection = function()
 {
-    console.log('click');
-    newDetectionValue = detection.value
-    console.log(newDetectionValue);
+    newDetectionValue = detection.value;
     if (newDetectionValue != detectionValue)
     {
-        console.log('new get')
+        if (newDetectionValue != "all")
+        {
+            getHistoryFilter(newDetectionValue);
+        }
+        else
+        {
+            getHistory();
+        }
     }
-    detectionValue = newDetectionValue
+    detectionValue = newDetectionValue;
 }
 
 const imagePopUp = function(data)
 {
     data = data.outerHTML; //converting object into string
-    src = data.split("\"")[1];
+    src = data.split("\"")[1]; //getting the url to get the image
 
     html = `<img src=${src} class="image">`;
     document.getElementById("js-popUpImage").innerHTML = html;
@@ -85,15 +150,6 @@ const listenToUI = function ()
 
     toggle.addEventListener('change', toggleSystem);
     detection.addEventListener('click', listenToDetection);
-
-    modal = document.getElementById('js-modal');
-    close = document.querySelector('.close');
-    close.addEventListener('click', closePopUp);
-
-    image1 = document.querySelector(".js-image1");
-    image2 = document.querySelector(".js-image2");
-    image1.addEventListener('click', function() {imagePopUp(image1)});
-    image2.addEventListener('click', function() {imagePopUp(image2)});
 }
 
 const init = function()
@@ -102,8 +158,8 @@ const init = function()
     //get status from hub
     systemStatus = true;
     detectionValue = "all"
+    getHistory();
     listenToUI();
-    //getImage('test2.png');
 }
 
 document.addEventListener('DOMContentLoaded', init);
