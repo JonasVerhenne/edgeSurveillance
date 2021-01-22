@@ -16,6 +16,22 @@ const fetchData = function(url)
 //         .then(data => data);
 // }
 
+const getStatus = async function ()
+{
+    var status = await fetchData(`https://edgesurveillancefunction.azurewebsites.net/api/status/rpi-jover`);
+    status = status["status"];
+    if (status == "on")
+    {
+        document.getElementById("js-switch").checked = true;
+        systemStatus = true;
+    }
+    else if (status == "off")
+    {
+        document.getElementById("js-switch").checked = false;
+        systemStatus = false;
+    }
+}
+
 const getHistory = async function ()
 {
     historyList = [];
@@ -54,10 +70,13 @@ const showHistory = async function (history)
         {
             person_detected = "no person detected";
         }
+
+        time = history[i].time.split("T").join(" "); //replace the T with space
+
         htmlContent = 
         `<div class='grid-container grid-body'>
             <div class="grid-time">
-                ${history[i].time}
+                ${time}
             </div>
             <div class="grid-location">
                 ${history[i].location}
@@ -100,10 +119,28 @@ const showHistory = async function (history)
 
 const toggleSystem = function ()
 {
-    console.log("switching status");
     systemStatus = !systemStatus;
-    console.log(systemStatus);
+    updateStatus();
 }
+
+const updateStatus = function ()
+{
+    if (systemStatus)
+    {
+        status = "on";
+        console.log("turning on security");
+    }
+    else
+    {
+        status = "off";
+        console.log("turning off security");
+    }
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://edgesurveillancefunction.azurewebsites.net/api/status/rpi-jover");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({"status": status}));
+}
+
 
 const listenToDetection = function()
 {
@@ -156,7 +193,7 @@ const init = function()
 {
     console.log("DOM Loaded");
     //get status from hub
-    systemStatus = true;
+    systemStatus = getStatus();
     detectionValue = "all"
     getHistory();
     listenToUI();
